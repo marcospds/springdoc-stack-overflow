@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemRepository extends CrudRepository<Item, UUID> {
+public interface ItemRepository extends CrudRepository<Item, Long> {
 	Slice<Item> findAll(Pageable pageable);
 }

@@ -1,15 +1,16 @@
 package com.example.springdocstackoverflow.model;
 
-import java.util.UUID;
+import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,13 +29,17 @@ import lombok.experimental.Accessors;
 @Schema(name = "Item", description = "I.t.e.m")
 @Entity
 @TableName(value = "item", autoResultMap = true)
-public class Item extends Model<Item> {
-	
+public class Item extends Model<Item> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID id;
+	@TableId(value = "id", type = IdType.AUTO)
+	@Schema(description = "ID", type = "integer", name = "id")
+	private Long id;
+
+	@TableField(value = "name")
+	@Schema(description = "Name", type = "string", name = "name")
 	private String name;
 
 	public Item(String name) {
